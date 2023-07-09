@@ -2,9 +2,26 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EmailModule } from './email/email.module';
+import { ConfigModule } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  imports: [EmailModule],
+  // imports: [
+  //   ConfigModule.forRoot(),
+  //   EmailModule],
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'COMMUNICATION',
+        transport: Transport.TCP,
+      },
+      // {
+      //   name: 'ANALYTICS',
+      //   transport: Transport.TCP,
+      //   options: { port: 3001 },
+      // },
+    ]),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
