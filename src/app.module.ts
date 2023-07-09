@@ -6,22 +6,9 @@ import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  // imports: [
-  //   ConfigModule.forRoot(),
-  //   EmailModule],
   imports: [
-    ClientsModule.register([
-      {
-        name: 'COMMUNICATION',
-        transport: Transport.TCP,
-      },
-      // {
-      //   name: 'ANALYTICS',
-      //   transport: Transport.TCP,
-      //   options: { port: 3001 },
-      // },
-    ]),
-  ],
+    ConfigModule.forRoot(),
+    EmailModule],
   controllers: [AppController],
   providers: [AppService],
 })
